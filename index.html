@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowflake SQL Course | NxtCareerTech Institute</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+        }
+        
+        .snowflake-gradient {
+            background: linear-gradient(135deg, #29b5e8 0%, #0077b6 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .class-card {
+            transition: all 0.3s ease;
+        }
+        
+        .class-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-3px);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .module-card:hover {
+            transform: scale(1.03);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%) !important;
+            color: white !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white py-4 px-6 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold">NxtCareerTech Institute</h1>
+                    <p class="text-xs text-blue-200">Your Career, Our Priority</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#home" class="hover:text-cyan-300 transition">Home</a>
+                <a href="#about" class="hover:text-cyan-300 transition">About</a>
+                <a href="#curriculum" class="hover:text-cyan-300 transition">Curriculum</a>
+                <a href="#classes" class="hover:text-cyan-300 transition">Sessions</a>
+                <a href="#contact" class="hover:text-cyan-300 transition">Contact</a>
+                <a href="https://wa.me/918722049963?text=Hi%2C%20I%20am%20planning%20to%20switch%20to%20the%20IT%20field%20and%20I%20am%20looking%20for%20structured%20training%20and%20guidance.%20Please%20share%20the%20next%20steps" target="_blank" class="bg-white text-blue-600 px-5 py-2 rounded-full font-semibold hover:bg-cyan-100 transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp text-lg"></i> Enroll Now
+                </a>
+            </div>
+            <button id="mobileMenuBtn" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden fixed inset-0 bg-blue-900 z-40 pt-20 px-6">
+        <div class="flex flex-col gap-4 text-white text-xl">
+            <a href="#home" class="py-2 border-b border-blue-700">Home</a>
+            <a href="#about" class="py-2 border-b border-blue-700">About</a>
+            <a href="#curriculum" class="py-2 border-b border-blue-700">Curriculum</a>
+            <a href="#classes" class="py-2 border-b border-blue-700">Sessions</a>
+            <a href="#contact" class="py-2 border-b border-blue-700">Contact</a>
+            <a href="https://wa.me/918722049963?text=Hi%2C%20I%20am%20planning%20to%20switch%20to%20the%20IT%20field%20and%20I%20am%20looking%20for%20structured%20training%20and%20guidance.%20Please%20share%20the%20next%20steps" target="_blank" class="bg-white text-blue-600 px-5 py-3 rounded-full font-semibold mt-4 flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-xl"></i> Enroll Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <span class="bg-cyan-400/20 text-cyan-300 px-4 py-2 rounded-full text-sm font-medium">
+                    <i class="fas fa-star mr-2"></i>Top Rated Course
+                </span>
+                <h1 class="text-4xl lg:text-6xl font-bold mt-6 mb-4">
+                    Master <span class="text-cyan-300">Snowflake SQL</span> in 41 Sessions
+                </h1>
+                <p class="text-lg text-blue-100 mb-8">
+                    Comprehensive hands-on training in Snowflake Data Cloud. From Data Warehousing fundamentals to Azure Integration, become a certified data professional.
+                </p>
+
+                <div class="flex items-center gap-8 mt-10">
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold">41</h3>
+                        <p class="text-blue-200 text-sm">Sessions</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold">10</h3>
+                        <p class="text-blue-200 text-sm">Modules</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold">24/7</h3>
+                        <p class="text-blue-200 text-sm">Support</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="w-80 h-80 bg-white/10 rounded-full absolute -top-10 -left-10 floating"></div>
+                    <div class="relative bg-white p-8 rounded-3xl shadow-2xl">
+                        <img src="https://www.vectorlogo.zone/logos/snowflake/snowflake-icon.svg" alt="Snowflake" class="w-48 h-48 mx-auto">
+                        <div class="text-center mt-4">
+                            <h3 class="text-blue-900 font-bold text-xl">Snowflake Data Cloud</h3>
+                            <p class="text-gray-500">Official Curriculum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 px-6 bg-white">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50">
+                <i class="fas fa-users text-4xl text-blue-500 mb-3"></i>
+                <h3 class="text-3xl font-bold text-gray-800">50+</h3>
+                <p class="text-gray-500">Students Enrolled</p>
+            </div>
+            <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50">
+                <i class="fas fa-certificate text-4xl text-green-500 mb-3"></i>
+                <h3 class="text-3xl font-bold text-gray-800">98%</h3>
+                <p class="text-gray-500">Success Rate</p>
+            </div>
+            <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50">
+                <i class="fas fa-briefcase text-4xl text-purple-500 mb-3"></i>
+                <h3 class="text-3xl font-bold text-gray-800">5+</h3>
+                <p class="text-gray-500">Placed Students</p>
+            </div>
+            <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-yellow-50">
+                <i class="fas fa-building text-4xl text-orange-500 mb-3"></i>
+                <h3 class="text-3xl font-bold text-gray-800">100+</h3>
+                <p class="text-gray-500">Partner Companies</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-medium">About Course</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-4">Why Learn Snowflake SQL?</h2>
+                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Snowflake is the leading cloud data platform. Master it to unlock high-paying data engineering and analytics careers.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover transition-all duration-300">
+                    <div class="w-16 h-16 snowflake-gradient rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-cloud text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Cloud-Native Platform</h3>
+                    <p class="text-gray-500">Learn the world's most powerful cloud data warehouse with auto-scaling and near-unlimited storage.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-dollar-sign text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">High-Paying Career</h3>
+                    <p class="text-gray-500">Snowflake professionals earn 30-50% more than traditional SQL developers. Average salary: $120K+</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-rocket text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Industry Demand</h3>
+                    <p class="text-gray-500">4000+ companies including Fortune 500 use Snowflake. Job openings grew 300% in last 2 years.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Overview -->
+    <section id="curriculum" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-cyan-100 text-cyan-600 px-4 py-2 rounded-full text-sm font-medium">Curriculum</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-4">Course Modules</h2>
+                <p class="text-gray-500 mt-4">41 comprehensive sessions divided into 10 learning modules</p>
+            </div>
+            
+            <!-- Module Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+                <div class="module-card bg-gradient-to-br from-blue-500 to-blue-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="1">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-database text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">5 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 1</h3>
+                    <p class="text-blue-100 text-xs">Fundamentals</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-cyan-500 to-cyan-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="2">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-history text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">4 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 2</h3>
+                    <p class="text-cyan-100 text-xs">Time Travel & Tables</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-teal-500 to-teal-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="3">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-upload text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">7 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 3</h3>
+                    <p class="text-teal-100 text-xs">Data Loading</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="4">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">1 Session</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 4</h3>
+                    <p class="text-emerald-100 text-xs">Security & Access</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-violet-500 to-violet-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-warehouse text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">6 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 5</h3>
+                    <p class="text-violet-100 text-xs">Stages & Storage</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-purple-500 to-purple-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="6">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-stream text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">4 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 6</h3>
+                    <p class="text-purple-100 text-xs">Pipelines & Semi-Structured</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-pink-500 to-pink-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="7">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-water text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">3 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 7</h3>
+                    <p class="text-pink-100 text-xs">Streams, SCD & Views</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-orange-500 to-orange-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="8">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-share-alt text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">3 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 8</h3>
+                    <p class="text-orange-100 text-xs">Sharing & Advanced SQL</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-red-500 to-red-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="9">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-cogs text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">4 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 9</h3>
+                    <p class="text-red-100 text-xs">Procedures & Performance</p>
+                </div>
+                <div class="module-card bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-5 rounded-2xl cursor-pointer hover:shadow-xl transition" data-module="10">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-cloud text-lg"></i>
+                        </div>
+                        <span class="bg-white/20 px-2 py-1 rounded-full text-xs">4 Sessions</span>
+                    </div>
+                    <h3 class="text-sm font-bold">Module 10</h3>
+                    <p class="text-indigo-100 text-xs">Cloud Integration & Projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Sessions Section -->
+    <section id="classes" class="py-20 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-medium">Complete Syllabus</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-4">All 41 Sessions</h2>
+                <p class="text-gray-500 mt-4">Comprehensive Snowflake SQL training curriculum</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button class="filter-btn active px-4 py-2 rounded-full font-medium transition text-sm" data-filter="all">All Sessions</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="1">Fundamentals</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="2">Time Travel</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="3">Data Loading</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="4">Security</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="5">Stages</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="6">Pipelines</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="7">Streams & SCD</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="8">Sharing</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="9">Procedures</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium hover:bg-gray-300 transition text-sm" data-filter="10">Cloud & Projects</button>
+            </div>
+
+            <!-- Classes Grid -->
+            <div id="classesGrid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <!-- Classes will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-purple-100 text-purple-600 px-4 py-2 rounded-full text-sm font-medium">Why Choose Us</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-4">Course Features</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-video text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">HD Video Lectures</h3>
+                        <p class="text-gray-500 text-sm">High-quality recorded sessions you can watch anytime, anywhere</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-laptop-code text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Hands-on Labs</h3>
+                        <p class="text-gray-500 text-sm">Practice on real Snowflake environment with guided exercises</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-file-alt text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Study Materials</h3>
+                        <p class="text-gray-500 text-sm">Comprehensive PDF notes, cheat sheets, and quick references</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-tasks text-orange-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Assignments</h3>
+                        <p class="text-gray-500 text-sm">Regular assignments with detailed solutions and feedback</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-certificate text-pink-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Certification</h3>
+                        <p class="text-gray-500 text-sm">Industry-recognized certificate upon course completion</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-headset text-cyan-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">Doubt Support</h3>
+                        <p class="text-gray-500 text-sm">Get your doubts cleared by expert instructors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-medium">Expert Guidance</span>
+                <h2 class="text-4xl font-bold mt-4">Learn from Industry Experts</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/10 p-8 rounded-2xl backdrop-blur text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Basavaraja</h3>
+                    <p class="text-cyan-300 mb-1">Senior Data Engineer</p>
+                    <p class="text-blue-200 mb-4">10+ Years Experience</p>
+                    <p class="text-sm text-gray-300">Snowflake Certified Expert with experience at Fortune 500 companies</p>
+                </div>
+                <div class="bg-white/10 p-8 rounded-2xl backdrop-blur text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Hitesh</h3>
+                    <p class="text-cyan-300 mb-1">Cloud Architect</p>
+                    <p class="text-blue-200 mb-4">8+ Years Experience</p>
+                    <p class="text-sm text-gray-300">Azure & AWS certified with expertise in cloud data solutions</p>
+                </div>
+                <div class="bg-white/10 p-8 rounded-2xl backdrop-blur text-center">
+                    <div class="w-24 h-24 bg-gradient-to-br from-green-400 to-teal-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Bharath Babu</h3>
+                    <p class="text-cyan-300 mb-1">Analytics Lead</p>
+                    <p class="text-blue-200 mb-4">8+ Years Experience</p>
+                    <p class="text-sm text-gray-300">Expert in building analytics solutions and BI dashboards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-medium">Get In Touch</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-4">Contact Us</h2>
+                <p class="text-gray-500 mt-4">Have questions? Reach out to us!</p>
+            </div>
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-gradient-to-br from-blue-600 to-cyan-500 p-8 rounded-2xl text-white mb-6">
+                    <h3 class="text-2xl font-bold mb-6 text-center">NxtCareerTech Institute</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-lg">Address</p>
+                                <p class="text-blue-100">Bangalore</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-phone text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-lg">Phone</p>
+                                <p class="text-blue-100">8722049963</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-envelope text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-lg">Email</p>
+                                <p class="text-blue-100">nxtcareertechinstitute@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Enroll Now WhatsApp Button -->
+                    <a href="https://wa.me/918722049963?text=Hi%2C%20I%20am%20planning%20to%20switch%20to%20the%20IT%20field%20and%20I%20am%20looking%20for%20structured%20training%20and%20guidance.%20Please%20share%20the%20next%20steps" target="_blank" class="mt-6 w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition shadow-lg">
+                        <i class="fab fa-whatsapp text-2xl"></i> Enroll Now via WhatsApp
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <h4 class="font-bold text-gray-800 mb-4 text-center">Follow Us</h4>
+                    <div class="flex gap-4 justify-center">
+                        <a href="#" class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xl">NxtCareerTech</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Empowering careers through quality tech education. Join thousands of successful professionals.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Courses</a></li>
+                        <li><a href="#" class="hover:text-white transition">Career Support</a></li>
+                        <li><a href="#" class="hover:text-white transition">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Courses</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Snowflake SQL</a></li>
+                        <li><a href="#" class="hover:text-white transition">Data Engineering</a></li>
+                        <li><a href="#" class="hover:text-white transition">Azure Data Factory</a></li>
+                        <li><a href="#" class="hover:text-white transition">Python for Data</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 NxtCareerTech Institute. All rights reserved. | Made with <i class="fas fa-heart text-red-500"></i> for aspiring data professionals</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sessions Data - All 41 Snowflake SQL Sessions
+        const classesData = [
+            // Module 1: Fundamentals (5 sessions)
+            { id: 1, module: 1, title: "Data Warehousing Overview", desc: "Introduction to data warehousing concepts, architecture, and why it matters in modern analytics", duration: "1 hour", icon: "fa-database" },
+            { id: 2, module: 1, title: "RDBMS vs Hadoop vs Snowflake Architecture", desc: "Compare traditional databases, Hadoop ecosystem, and Snowflake's unique architecture", duration: "1 hour", icon: "fa-layer-group" },
+            { id: 3, module: 1, title: "Virtual Warehouse Deep Dive", desc: "Understanding virtual warehouses, compute resources, and warehouse management", duration: "1 hour", icon: "fa-warehouse" },
+            { id: 4, module: 1, title: "Horizontal vs Vertical Scaling", desc: "Scaling strategies in Snowflake - when to scale up vs scale out", duration: "1 hour", icon: "fa-expand-arrows-alt" },
+            { id: 5, module: 1, title: "Virtual Warehouse Deep Dive - Part 2", desc: "Advanced warehouse configurations, multi-cluster warehouses, and optimization", duration: "1 hour", icon: "fa-server" },
+            
+            // Module 2: Time Travel & Tables (4 sessions)
+            { id: 6, module: 2, title: "Time Travel & Table Types", desc: "Introduction to Snowflake Time Travel and different table types available", duration: "1 hour", icon: "fa-history" },
+            { id: 7, module: 2, title: "Table Types Deep Dive", desc: "Permanent, transient, and temporary tables - when to use each", duration: "1 hour", icon: "fa-table" },
+            { id: 8, module: 2, title: "Time Travel vs Failsafe", desc: "Understanding the differences between Time Travel and Failsafe features", duration: "1 hour", icon: "fa-clock" },
+            { id: 9, module: 2, title: "Failsafe & Data Loading Using UI", desc: "Failsafe configuration and loading data through Snowflake UI", duration: "1 hour", icon: "fa-shield-alt" },
+            
+            // Module 3: Data Loading (7 sessions)
+            { id: 10, module: 3, title: "Data Organization in Data Lake & COPY", desc: "Organizing data in data lakes and introduction to COPY command", duration: "1 hour", icon: "fa-folder-open" },
+            { id: 11, module: 3, title: "Data Loading With COPY - Deep Dive", desc: "Advanced COPY command options and best practices", duration: "1 hour", icon: "fa-copy" },
+            { id: 12, module: 3, title: "File Format Deep Dive", desc: "CSV, JSON, Parquet, Avro file formats and their configurations", duration: "1 hour", icon: "fa-file-alt" },
+            { id: 13, module: 3, title: "COPY Command Deep Dive", desc: "Complete mastery of COPY command with all options", duration: "1 hour", icon: "fa-terminal" },
+            { id: 14, module: 3, title: "Data Load Error Handling & Validations", desc: "Handling errors during data loading and validation techniques", duration: "1 hour", icon: "fa-exclamation-triangle" },
+            { id: 15, module: 3, title: "Validation Modes & Tasks", desc: "Different validation modes and introduction to Snowflake Tasks", duration: "1 hour", icon: "fa-check-circle" },
+            { id: 16, module: 3, title: "Tasks Deep Dive", desc: "Creating, scheduling, and managing Snowflake Tasks", duration: "1 hour", icon: "fa-tasks" },
+            
+            // Module 4: Security & Access (1 session)
+            { id: 17, module: 4, title: "Access Management (RBAC)", desc: "Role-Based Access Control - managing users, roles, and permissions", duration: "1 hour", icon: "fa-user-shield" },
+            
+            // Module 5: Stages & Storage (6 sessions)
+            { id: 18, module: 5, title: "Stage Types & SnowSQL", desc: "Internal, external stages and introduction to SnowSQL CLI", duration: "1 hour", icon: "fa-layer-group" },
+            { id: 19, module: 5, title: "SnowSQL & Data Unloading", desc: "Using SnowSQL CLI and exporting data from Snowflake", duration: "1 hour", icon: "fa-download" },
+            { id: 20, module: 5, title: "Data Storage & Micropartitions Deep Dive", desc: "Understanding Snowflake's micro-partition storage architecture", duration: "1 hour", icon: "fa-hdd" },
+            { id: 21, module: 5, title: "Caches Deep Dive", desc: "Result cache, metadata cache, and warehouse cache explained", duration: "1 hour", icon: "fa-memory" },
+            { id: 22, module: 5, title: "Zero Copy Clone", desc: "Creating instant clones without duplicating storage", duration: "1 hour", icon: "fa-clone" },
+            { id: 23, module: 5, title: "Storage Integration Setup", desc: "Configuring storage integrations with cloud providers", duration: "1 hour", icon: "fa-plug" },
+            
+            // Module 6: Pipelines & Semi-Structured Data (4 sessions)
+            { id: 24, module: 6, title: "Snowpipe Deep Dive", desc: "Continuous data loading with Snowpipe automation", duration: "1 hour", icon: "fa-stream" },
+            { id: 25, module: 6, title: "Semi-structured (JSON) Data Loading", desc: "Loading and querying JSON data in Snowflake", duration: "1 hour", icon: "fa-code" },
+            { id: 26, module: 6, title: "Parquet Data Loading & Resource Monitor", desc: "Working with Parquet files and setting up resource monitors", duration: "1 hour", icon: "fa-file-code" },
+            { id: 27, module: 6, title: "External Tables Deep Dive", desc: "Querying data in external storage without loading", duration: "1 hour", icon: "fa-external-link-alt" },
+            
+            // Module 7: Streams, SCD & Views (3 sessions)
+            { id: 28, module: 7, title: "Streams & SCD", desc: "Change data capture with Streams and Slowly Changing Dimensions", duration: "1 hour", icon: "fa-water" },
+            { id: 29, module: 7, title: "SCD Type 1 & Type 2 Implementations", desc: "Practical implementation of SCD Type 1 and Type 2 patterns", duration: "1 hour", icon: "fa-exchange-alt" },
+            { id: 30, module: 7, title: "Views & Materialized Views", desc: "Creating views and materialized views for data abstraction", duration: "1 hour", icon: "fa-eye" },
+            
+            // Module 8: Sharing & Advanced SQL (3 sessions)
+            { id: 31, module: 8, title: "Data Sharing Deep Dive", desc: "Secure data sharing between Snowflake accounts", duration: "1 hour", icon: "fa-share-alt" },
+            { id: 32, module: 8, title: "Functions & Table Functions", desc: "Built-in functions, UDFs, and table functions", duration: "1 hour", icon: "fa-function" },
+            { id: 33, module: 8, title: "Data Masking & Row Access Policy", desc: "Dynamic data masking and row-level security", duration: "1 hour", icon: "fa-mask" },
+            
+            // Module 9: Procedures & Performance (4 sessions)
+            { id: 34, module: 9, title: "Stored Procedures", desc: "Creating and executing stored procedures in Snowflake", duration: "1 hour", icon: "fa-cogs" },
+            { id: 35, module: 9, title: "Stored Procedures - Deep Dive 2", desc: "Advanced stored procedure patterns and error handling", duration: "1 hour", icon: "fa-code-branch" },
+            { id: 36, module: 9, title: "Performance Optimization", desc: "Query optimization, clustering keys, and best practices", duration: "1 hour", icon: "fa-tachometer-alt" },
+            { id: 37, module: 9, title: "Performance Optimization & Pricing", desc: "Cost optimization and Snowflake editions comparison", duration: "1 hour", icon: "fa-dollar-sign" },
+            
+            // Module 10: Cloud Integration & Projects (4 sessions)
+            { id: 38, module: 10, title: "Azure Blob Integration & Snowpipe Setup", desc: "Integrating Azure Blob Storage with Snowpipe", duration: "1 hour", icon: "fa-cloud" },
+            { id: 39, module: 10, title: "Scripting Procedures & Dynamic Tables", desc: "Snowflake scripting, dynamic tables, and email configuration", duration: "1 hour", icon: "fa-scroll" },
+            { id: 40, module: 10, title: "Azure Data Factory Integration", desc: "Building data pipelines with ADF and Snowflake", duration: "1 hour", icon: "fa-project-diagram" },
+            { id: 41, module: 10, title: "Project Overview Session", desc: "Comprehensive project walkthrough and certification prep", duration: "1 hour", icon: "fa-award" }
+        ];
+
+        // Module info with colors and names
+        const moduleInfo = {
+            1: { name: 'Fundamentals', bg: 'from-blue-500 to-blue-600', light: 'bg-blue-50 border-blue-200', text: 'text-blue-600' },
+            2: { name: 'Time Travel & Tables', bg: 'from-cyan-500 to-cyan-600', light: 'bg-cyan-50 border-cyan-200', text: 'text-cyan-600' },
+            3: { name: 'Data Loading', bg: 'from-teal-500 to-teal-600', light: 'bg-teal-50 border-teal-200', text: 'text-teal-600' },
+            4: { name: 'Security & Access', bg: 'from-emerald-500 to-emerald-600', light: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-600' },
+            5: { name: 'Stages & Storage', bg: 'from-violet-500 to-violet-600', light: 'bg-violet-50 border-violet-200', text: 'text-violet-600' },
+            6: { name: 'Pipelines & Semi-Structured', bg: 'from-purple-500 to-purple-600', light: 'bg-purple-50 border-purple-200', text: 'text-purple-600' },
+            7: { name: 'Streams, SCD & Views', bg: 'from-pink-500 to-pink-600', light: 'bg-pink-50 border-pink-200', text: 'text-pink-600' },
+            8: { name: 'Sharing & Advanced SQL', bg: 'from-orange-500 to-orange-600', light: 'bg-orange-50 border-orange-200', text: 'text-orange-600' },
+            9: { name: 'Procedures & Performance', bg: 'from-red-500 to-red-600', light: 'bg-red-50 border-red-200', text: 'text-red-600' },
+            10: { name: 'Cloud Integration & Projects', bg: 'from-indigo-500 to-indigo-600', light: 'bg-indigo-50 border-indigo-200', text: 'text-indigo-600' }
+        };
+
+        // Render classes
+        function renderClasses(filter = 'all') {
+            const grid = document.getElementById('classesGrid');
+            const filteredClasses = filter === 'all' 
+                ? classesData 
+                : classesData.filter(c => c.module === parseInt(filter));
+            
+            grid.innerHTML = filteredClasses.map(cls => {
+                const colors = moduleInfo[cls.module];
+                
+                return `
+                    <div class="class-card bg-white p-5 rounded-2xl border-2 border-gray-100 
+                        shadow-md transition-all duration-300 relative">
+                        <div class="flex items-start gap-3 mb-3">
+                            <div class="w-11 h-11 bg-gradient-to-br ${colors.bg} rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas ${cls.icon} text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <span class="${colors.light} ${colors.text} text-xs px-2 py-0.5 rounded-full font-medium border">Module ${cls.module}</span>
+                                <h3 class="font-bold text-gray-800 mt-1.5 text-sm leading-tight">Session ${cls.id}: ${cls.title}</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 text-xs mb-3 line-clamp-2">${cls.desc}</p>
+                        <div class="flex items-center text-xs">
+                            <span class="text-gray-400"><i class="fas fa-clock mr-1"></i> ${cls.duration}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                btn.classList.add('active');
+                btn.classList.remove('bg-gray-200', 'text-gray-700');
+                renderClasses(btn.dataset.filter);
+            });
+        });
+
+        // Module cards click to filter
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const module = card.dataset.module;
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                    if(b.dataset.filter === module) {
+                        b.classList.add('active');
+                        b.classList.remove('bg-gray-200', 'text-gray-700');
+                    }
+                });
+                renderClasses(module);
+                document.getElementById('classes').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize
+        renderClasses();
+    </script>
+</body>
+</html>
